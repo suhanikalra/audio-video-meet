@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAABBVBMVEX///9Mr1D7wC0eiOUVZcAufTLlOTVBrEbZ7dpGrUr80nCDxob7viRJrk3R5fkAg+T8yVDv9f0AfuNou2v5ti/bVFYyd8gPX8ZIqV/kKjXmNjEAXr7Q3vGRsN37vRj+57fA4cH+9/cXeTL97u7nSEWVzZf3+/d3wHrq9epdtmDnTku43bk5qj6c0J5TslfoVlPxvS3ZtC4+l0JHpkv76Oz7ynL814X/+ezlNkD8z2f946z+8NNxvnTg8OGenzF/lDBYiTHlLCY8gTLfc3XZSVb5wFHJri6upC9xkDHquy7Mry6RmjDOrRrO27YPdSA3nzw3iztktne0yehmlNLC1Oyku+GRruEuhq1rAAADv0lEQVR4nO3ciVIaQRDGcYdIlg2QaDTiEXEBwWtV1MRcRszlEXOYw7z/owQxBHZ3ZixSM92m6/s/gPCrWbqokumxMYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYT+sSdP7zlof+kZN8RU4/l0yUXV6ovbaWwsz03n3FSqLnFrNDWW550Jc7nqS25Ppi7wrkNhrvqKW5TqCuhUWJrgJiXrAZ0Kb9khNtavgG6FpX3Tq0UHBxuUurH+CToW5tqGV2vGYRhvsgAdC3PaF2utBKpbsMoBpBCuroWqJywQAtf7QAJhQV0DKYWDEyQQbsRlRS2sDQG9CzdjpaiFtfUhoGdhqxgocmES6Fe4OjUEpBI2kkCvwkIYKnJh6gS9CqOgrMiFte0U0KNwM1CKXJg5QY/ClTSQQqgB+hImZwyVMPuIehMWtsIM0L9QC/QjTM8YGqHuEfUkHPoeQyg0AD0IE99j6IT6R9SHsKWZMQRCI9C58LVuxvgXmoGuhVGomzHehRagY+GhMgM9Cmvbb4xAt8JOfcsM9Ce0Al0K20f1vAXoTdgFzluaG+l/Tzbgztt6nkX47pG19x8mRskMPM5fxSC8/+COtYeTo/y1paoJeFIXLjy/BooVtk//AKUKz476QKHCnfwgkcLjunDh4TBQorCTAMoTto+SQHHC3hc1ycKP+UyyhCfpA5QmPNcARQlPdUBBwswQlSbc0fIECY/1ByhHeGgEChF2zEARQtOMESM8y3xREyb8ZONJEH7+Il0YfRUvDPbEC5W6EC+0EmUI1a54YdlMFCJUyjhvxAiNH0ZBQgNRklA/b0QJtfNGlFA7b4QJNURpwuy8kSdMEwUKUyNVojBJFClMzBuZQqXkCwfzRqzw74dRrrBPZBA+nrE3/m1qhNbMPwHeYxMujFurzIblEbIA9m6t0PauR+tCvLBLZPidN6lQ7TL8Vp9WuKW/0yVIqBjuzFAL6e89kQvJ767RC6nvH3IIae+QsghJ7wHzCCnvcjMJCe/jswnJdirwCan2YjAKiXabcApp9tOwCkl2DPEKKfZEcQv97/piF3rf10YrLOveguede/xnONib2PIinKQUltcM76K3+9LXes8ZQmHYNL2LqFj0tjPi0n6IToUx4XbLQTc8pi6FxofUc98rVEKeI+y2aDtFh0Jvo+TmLitmozNhGEdswO5n8UelsqCvMhu6KIhXKLcE6/p5uajtV7PooGbE7UMIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEL/eb8BduzhK0H83VQAAAAASUVORK5CYII=" type="image/x-icon">
+
+    <title>Meet</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/3422698afe.js" crossorigin="anonymous"></script>
+    <script>
+        const ROOM_ID = "<%= roomId %>";
+    </script>
+    <script defer src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="/js/script.js" defer></script>
+</head>
+<body>
+    <div id="main-div">
+        <div id="video-grid"></div>
+        <div id="screen-grid"></div>
+        <div id="talkbox">
+            <div id="talkheader">
+                <div>In-call messages</div>
+                <div id="close-talkdiv"><i class="fa fa-times" aria-hidden="true"></i></div>
+            </div>
+            <div id="chats">
+                <div id="messages-info">Messages can only be seen by people in the call and are deleted when the call ends</div>
+                <ul id="messages">
+
+                </ul>
+            </div>
+            <div id="form">
+                <form>
+                    <input type="text" id="message-form" placeholder="Send a message to everyone" autocomplete="off">
+                    <button type="submit">  <i class="fa-regular fa-circle-caret-right"></i></button>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="controls-tab">
+        <div id="time"></div>
+        <div class="icons">
+            <div class="btn" id="mute"><i class="fa fa-microphone"></i></div>
+            <div class="btn" id="video-off"><i class="fa fa-video-camera"></i></div>
+            <div class="btn" id="screen-btn"><i class="fa fa-upload"></i></div>
+            <a href="/room/end/<%= roomId %>"><div class="end-btn"><i  class="fa fa-phone" aria-hidden="true"></i></div></a>
+        </div>
+        <div class="icons">
+            <div class="btn" id="talkbox-btn"><i class="fas fa-comment-alt"></i></i></div>
+           
+    </div>
+</body>
+</html>
